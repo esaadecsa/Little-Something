@@ -31,7 +31,7 @@ const CONFIG = {
   // Surat penutup yang muncul di slide sebelum FINAL, tampil dengan animasi ketik.
   farewellLetter: [
     "Aku berhenti mencoba menebak masa depan kita.",
-    "Yang aku tahu, setiap orang berhak menemukan jalannya sendiri — dan kamu juga.",
+    "Yang aku tahu, setiap orang berhak menemukan jalannya sendiri dan kamu juga.",
     "Jadi di hari ini, aku titipkan satu harapan: semoga jalanmu selalu membawamu ke tempat yang baik, apa pun arahnya.",
     "Dan semoga, di suatu titik, jalan itu bertemu lagi dengan jalanku."
   ],
