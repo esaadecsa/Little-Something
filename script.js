@@ -1562,7 +1562,7 @@ function updatePinRequestCountdown() {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  el.innerHTML = `<b>${days}</b> hari <b>${String(hours).padStart(2, "0")}</b> jam <b>${String(minutes).padStart(2, "0")}</b> menit <b>${String(seconds).padStart(2, "0")}</b> detik lagi <small>· WIB</small>`;
+  el.innerHTML = `<b>${days}</b> hari <b>${String(hours).padStart(2, "0")}</b> jam <b>${String(minutes).padStart(2, "0")}</b> menit <b>${String(seconds).padStart(2, "0")}</b> detik lagi <small>·`;
 }
 updatePinRequestCountdown();
 setInterval(updatePinRequestCountdown, 1000);
