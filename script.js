@@ -189,7 +189,7 @@ function applyTimeNarrative() {
   if (!el) return;
   const hour = getWibParts().hour;
   let line;
-  if (hour >= 4 && hour < 10) line = "pagi ini, semoga langkahmu ringan sejak awal ✦";
+  if (hour >= 4 && hour < 10) line = "pagi ini, semoga langkahmu ringan di beri kemudahan ✦";
   else if (hour >= 10 && hour < 15) line = "siang ini, semoga harimu tetap baik-baik saja ✦";
   else if (hour >= 15 && hour < 18) line = "sore ini, semoga sisa harimu berjalan tenang ✦";
   else line = "malam ini, semoga kamu sempat istirahat cukup ✦";
