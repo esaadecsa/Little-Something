@@ -21,7 +21,7 @@ const $ = (selector, parent = document) => parent.querySelector(selector);
   else if (hour >= 10 && hour < 15) greeting = "Hope your day’s going well.";
   else if (hour >= 15 && hour < 18) greeting = "Have a lovely evening.";
   const greetEl = $("#cinematicGreeting");
-  if (greetEl) greetEl.textContent = greeting + " ✦";
+  if (greetEl) greetEl.textContent = greeting + " 💕";
 
   const dust = $("#cinematicDust");
   if (dust && !reduced) {
