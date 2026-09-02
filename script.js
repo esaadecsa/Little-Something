@@ -28,10 +28,10 @@ function getEffectiveNow() {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const hour = getWibParts().hour;
-  let greeting = "Selamat malam";
-  if (hour >= 4 && hour < 10) greeting = "Selamat pagi";
-  else if (hour >= 10 && hour < 15) greeting = "Selamat siang";
-  else if (hour >= 15 && hour < 18) greeting = "Selamat sore";
+  let greeting = "Goodnight, take it easy.";
+  if (hour >= 4 && hour < 10) greeting = "A beautiful morning to you.";
+  else if (hour >= 10 && hour < 15) greeting = "Hope your day’s going well.";
+  else if (hour >= 15 && hour < 18) greeting = "Have a lovely evening.";
   const greetEl = $("#cinematicGreeting");
   if (greetEl) greetEl.textContent = greeting + " ✦";
 
