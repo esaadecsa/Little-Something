@@ -1,0 +1,156 @@
+/* =============================================================
+   A LITTLE SOMETHING — "WOW" ENHANCEMENT LAYER
+   Dimuat SETELAH style.css. Tidak mengubah satupun ID/class yang
+   dipakai script.js / living-story-engine.js — murni memperkaya
+   visual: cahaya, kedalaman, gerak halus, tipografi yang lebih
+   hidup. Tetap dalam nuansa romantis-lembut yang sudah ada, cuma
+   dinaikkan level "mewah"-nya satu takik.
+   ============================================================= */
+
+:root{
+  /* aksen tambahan: champagne-gold hangat, sebagai kontras dari
+     violet/magenta yang sudah ada — dipakai buat detail kecil
+     supaya kartu terasa berlapis, bukan cuma satu tone ungu-pink */
+  --wow-champagne:#f6dfae;
+  --wow-champagne-rgb:246,223,174;
+  --wow-deep:#050310;
+  --wow-glow-soft:0 0 40px -6px rgba(var(--violet-rgb),.55);
+  --wow-glow-warm:0 0 34px -8px rgba(var(--wow-champagne-rgb),.45);
+}
+
+/* -------------------------------------------------------------
+   1) KARTU — kedalaman berlapis + garis foil yang "bernapas"
+   ------------------------------------------------------------- */
+.card{
+  box-shadow:
+    var(--shadow-lift),
+    inset 0 0 0 1px rgba(238,205,142,.06),
+    var(--wow-glow-soft);
+}
+/* nafas cahaya sangat halus di balik kartu, loop lambat — bukan
+   efek baru yang ramai, hanya membuat kartu terasa "hidup" */
+.card::after{
+  animation:wowCardBreathe 7s ease-in-out infinite;
+}
+@keyframes wowCardBreathe{
+  0%,100%{opacity:.85;transform:translateX(-50%) scale(1)}
+  50%{opacity:1;transform:translateX(-50%) scale(1.06)}
+}
+/* garis foil jadi dua-warna (ungu → champagne) supaya berkilau
+   lebih kaya di sudut, tetap tipis & elegan seperti aslinya */
+.card::before{
+  background:linear-gradient(135deg,
+    rgba(235,218,255,.95) 0%,
+    rgba(154,95,232,.45) 32%,
+    var(--wow-champagne) 55%,
+    rgba(240,71,159,.5) 78%,
+    rgba(255,217,240,.9) 100%);
+}
+
+/* -------------------------------------------------------------
+   2) TIPOGRAFI — heading lebih hidup, eyebrow lebih berkilau
+   ------------------------------------------------------------- */
+h1,h2{
+  text-shadow:0 0 26px rgba(var(--violet-rgb),.28);
+}
+h1 span,h2 em{
+  background:linear-gradient(100deg,
+    var(--lavender-soft) 0%,
+    var(--wow-champagne) 30%,
+    var(--magenta) 65%,
+    var(--violet) 100%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  animation:wowTextSheen 6s ease-in-out infinite;
+}
+@keyframes wowTextSheen{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.eyebrow{
+  background:linear-gradient(100deg,var(--lavender-soft),var(--wow-champagne) 50%,var(--magenta));
+  background-size:200% 100%;
+  animation:wowTextSheen 5s ease-in-out infinite;
+}
+.card .eyebrow::before{
+  background:
+    radial-gradient(circle at 50% 50%,var(--wow-champagne) 0 2px,transparent 2.5px),
+    linear-gradient(90deg,transparent,rgba(var(--wow-champagne-rgb),.8) 15%,rgba(var(--wow-champagne-rgb),.8) 85%,transparent);
+}
+
+/* -------------------------------------------------------------
+   3) TOMBOL — glow berdenyut lembut + sapuan kilau lebih kaya
+   ------------------------------------------------------------- */
+.primary-btn{
+  box-shadow:
+    var(--glow-magenta),
+    0 1px 0 rgba(255,255,255,.25) inset,
+    0 0 0 1px rgba(var(--wow-champagne-rgb),.18);
+  animation:wowBtnPulse 3.2s ease-in-out infinite;
+}
+@keyframes wowBtnPulse{
+  0%,100%{box-shadow:var(--glow-magenta),0 1px 0 rgba(255,255,255,.25) inset,0 0 0 1px rgba(var(--wow-champagne-rgb),.18)}
+  50%{box-shadow:0 10px 40px -4px rgba(240,71,159,.75),0 1px 0 rgba(255,255,255,.3) inset,0 0 0 1px rgba(var(--wow-champagne-rgb),.32)}
+}
+.primary-btn:hover{transform:translateY(-3px) scale(1.015);filter:brightness(1.1)}
+.ghost-btn:hover{box-shadow:var(--wow-glow-warm)}
+
+/* -------------------------------------------------------------
+   4) LATAR AMBIENT — bintang & aurora lebih berlapis
+   ------------------------------------------------------------- */
+body::before{
+  background:
+    radial-gradient(1200px 780px at 85% -8%, rgba(var(--magenta-rgb),.24), transparent 60%),
+    radial-gradient(950px 680px at -8% 6%, rgba(var(--violet-rgb),.3), transparent 58%),
+    radial-gradient(700px 560px at 50% 108%, rgba(var(--wow-champagne-rgb),.14), transparent 60%),
+    var(--bg);
+}
+
+/* -------------------------------------------------------------
+   5) WISH / MEMORY / KEEPSAKE CARDS — micro-interaction saat disentuh
+   ------------------------------------------------------------- */
+.wish-pill.wish-card,.keepsake-note{
+  transition:transform .3s var(--ease-spring),box-shadow .3s var(--ease-out),border-color .3s;
+}
+.wish-pill.wish-card:hover,.keepsake-note:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px -12px rgba(var(--violet-rgb),.5);
+  border-color:rgba(var(--wow-champagne-rgb),.5);
+}
+
+/* -------------------------------------------------------------
+   6) PROGRESS NAV — sedikit lebih premium
+   ------------------------------------------------------------- */
+#sliderHeart{
+  filter:drop-shadow(0 0 6px rgba(var(--magenta-rgb),.7));
+}
+
+/* -------------------------------------------------------------
+   7) PIN GATE — momen pembuka terasa lebih "wow" sejak detik pertama
+   ------------------------------------------------------------- */
+#pinCard{
+  box-shadow:
+    var(--shadow-lift),
+    inset 0 0 0 1px rgba(238,205,142,.08),
+    0 0 60px -10px rgba(var(--violet-rgb),.6);
+}
+.pin-input{
+  transition:box-shadow .3s var(--ease-out),border-color .3s;
+}
+.pin-input:focus{
+  box-shadow:0 0 0 3px rgba(var(--wow-champagne-rgb),.28);
+}
+
+/* -------------------------------------------------------------
+   8) FINAL / ENDSCREEN — highlight penutup cerita
+   ------------------------------------------------------------- */
+.final-mark,.end-mark{
+  text-shadow:0 0 28px rgba(var(--wow-champagne-rgb),.7),0 0 50px rgba(var(--magenta-rgb),.5);
+}
+
+/* -------------------------------------------------------------
+   9) HORMATI prefers-reduced-motion — matikan semua loop baru
+   ------------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  .card::after,h1 span,h2 em,.eyebrow,.primary-btn{animation:none !important}
+}
