@@ -1,0 +1,405 @@
+/* =============================================================
+   A LITTLE SOMETHING — "WOW" ENHANCEMENT LAYER (v3 — STATIS)
+   ---------------------------------------------------------
+   Dimuat SETELAH style.css. Tidak mengubah satupun ID/class yang
+   dipakai script.js / living-story-engine.js.
+
+   FILOSOFI v3 — setelah beberapa kali percobaan animasi (kartu
+   "bernapas", tombol "berdenyut", kilau teks, partikel bintang
+   tambahan) tetap menyebabkan glitch di sebagian HP meski sudah
+   dibatasi ke layar aktif saja, pendekatan diubah TOTAL:
+
+   >>> NOL animasi CSS/JS tambahan. <<<
+
+   Semua "wow" di sini murni dari WARNA, CAHAYA (shadow/glow
+   statis), KONTRAS, dan KOMPOSISI — tidak ada satupun yang bisa
+   "gagal jalan" karena memang tidak ada yang berjalan. Ini jauh
+   lebih aman untuk perangkat low-end/Brave dengan Shields aktif,
+   dan tetap terasa lebih mewah dibanding versi asli.
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   1) KARTU — kedalaman lebih kaya lewat lapisan shadow statis
+   ------------------------------------------------------------- */
+.card{
+  box-shadow:
+    var(--shadow-lift),
+    0 0 40px -8px rgba(var(--violet-rgb),.38),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+/* garis foil tepi kartu: dua warna lembut, TANPA animasi */
+.card::before{
+  background:linear-gradient(135deg,
+    rgba(235,218,255,.75) 0%,
+    rgba(154,95,232,.4) 35%,
+    rgba(240,71,159,.4) 70%,
+    rgba(255,217,240,.65) 100%);
+}
+
+/* -------------------------------------------------------------
+   2) TIPOGRAFI — judul dengan gradient warna STATIS (tanpa animasi
+   background-position sama sekali, supaya nol risiko flicker)
+   ------------------------------------------------------------- */
+h1 span,h2 em{
+  background:linear-gradient(100deg,
+    var(--lavender-soft) 0%,
+    var(--violet) 55%,
+    var(--magenta) 100%);
+  -webkit-background-clip:text;background-clip:text;
+}
+
+/* -------------------------------------------------------------
+   3) TOMBOL — glow lebih kaya, statis (hover tetap boleh berubah,
+   itu respons ke interaksi user, bukan loop otomatis)
+   ------------------------------------------------------------- */
+.primary-btn{
+  box-shadow:var(--glow-magenta), 0 1px 0 rgba(255,255,255,.22) inset;
+}
+.primary-btn:hover{
+  box-shadow:0 10px 34px -6px rgba(240,71,159,.6), 0 1px 0 rgba(255,255,255,.25) inset;
+  filter:brightness(1.06);
+}
+
+/* -------------------------------------------------------------
+   4) LATAR AMBIENT — vignette statis + gradasi ungu/magenta lebih
+   dalam di sudut, TANPA elemen bergerak baru
+   ------------------------------------------------------------- */
+body::before{
+  background:
+    radial-gradient(1100px 720px at 85% -8%, rgba(var(--magenta-rgb),.16), transparent 62%),
+    radial-gradient(900px 620px at -8% 6%, rgba(var(--violet-rgb),.18), transparent 60%),
+    var(--bg);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 120% 100% at 50% 45%,
+    transparent 45%,
+    rgba(3,1,8,.32) 78%,
+    rgba(3,1,8,.6) 100%);
+}
+
+/* -------------------------------------------------------------
+   5) WISH / MEMORY / KEEPSAKE CARDS — hover statis (bukan loop),
+   aman karena cuma bereaksi ke sentuhan/kursor
+   ------------------------------------------------------------- */
+.wish-pill.wish-card:hover,.keepsake-note:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 26px -12px rgba(var(--violet-rgb),.35);
+}
+
+/* -------------------------------------------------------------
+   6) PIN GATE — glow statis, tanpa efek pembuka animasi
+   ------------------------------------------------------------- */
+#pinCard{
+  box-shadow:var(--shadow-lift), 0 0 46px -14px rgba(var(--violet-rgb),.42);
+}
+.pin-input:focus{
+  box-shadow:0 0 0 3px rgba(var(--violet-rgb),.24);
+}
+
+/* -------------------------------------------------------------
+   7) FINAL / ENDSCREEN — glow statis
+   ------------------------------------------------------------- */
+.final-mark,.end-mark{
+  text-shadow:0 0 30px rgba(var(--magenta-rgb),.4);
+}
+
+/* -------------------------------------------------------------
+   8) PLAN A (map-scene) & PLAN B (diary-scene) — dominan gelap,
+   ungu cuma gradasi tipis, statis
+   ------------------------------------------------------------- */
+.map-sky{
+  background:
+    radial-gradient(60% 50% at 20% 100%, rgba(143,98,216,.14), transparent 72%),
+    radial-gradient(55% 50% at 100% 0%, rgba(232,120,177,.1), transparent 72%),
+    linear-gradient(200deg, #05030f 0%, var(--bg-2) 60%, var(--bg) 100%);
+}
+.map-watercolor{opacity:.28}
+.map-watercolor-a{background:radial-gradient(circle,rgba(184,154,242,.32),rgba(184,154,242,0) 70%)}
+.map-watercolor-b{background:radial-gradient(circle,rgba(232,120,177,.28),rgba(232,120,177,0) 70%)}
+.diary-scene{
+  background:
+    radial-gradient(120% 140% at 50% 100%,rgba(217,200,255,.07),transparent 72%),
+    linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.05));
+}
+.diary-glow{
+  background:radial-gradient(60% 80% at 50% 50%,rgba(216,163,255,.12),transparent 72%);
+}
+
+/* =============================================================
+   A LITTLE UNIVERSE — TOTAL VISUAL REMASTER
+   Plan A = THE GIFT PLANET
+   Plan B = THE FLOATING DIARY
+   Static/depth-first effects: spectacular without particle overload.
+   ============================================================= */
+:root{
+  --universe-bg:#02040b;
+  --universe-blue:#081226;
+  --universe-violet:#21143c;
+  --universe-lilac:#8f7ab9;
+  --universe-star:#f5f1ff;
+  --universe-warm:#d8c8aa;
+}
+
+html,body{background:var(--universe-bg)!important}
+body::before{
+  background:
+    radial-gradient(900px 560px at 78% 8%,rgba(83,55,140,.18),transparent 62%),
+    radial-gradient(780px 620px at 12% 84%,rgba(25,63,116,.15),transparent 64%),
+    radial-gradient(500px 380px at 50% 45%,rgba(67,39,103,.08),transparent 72%),
+    #02040b!important;
+}
+body::after{
+  background:radial-gradient(ellipse 125% 105% at 50% 45%,transparent 42%,rgba(0,2,7,.35) 76%,rgba(0,1,5,.78) 100%)!important;
+}
+
+/* Global star field: one lightweight layer, no continuous DOM particle storm. */
+#deepSpace{background:
+  radial-gradient(2px 2px at 8% 18%,rgba(255,255,255,.8),transparent 70%),
+  radial-gradient(1px 1px at 22% 72%,rgba(215,225,255,.55),transparent 70%),
+  radial-gradient(1.5px 1.5px at 74% 22%,rgba(255,255,255,.7),transparent 70%),
+  radial-gradient(1px 1px at 88% 68%,rgba(210,220,255,.5),transparent 70%),
+  radial-gradient(1px 1px at 57% 86%,rgba(255,255,255,.55),transparent 70%),
+  radial-gradient(420px 300px at 70% 20%,rgba(78,51,125,.12),transparent 75%),
+  radial-gradient(520px 380px at 25% 80%,rgba(24,65,120,.1),transparent 75%)!important;
+  opacity:.9;}
+
+.screen{background:transparent!important}
+.card{
+  background:linear-gradient(145deg,rgba(9,12,27,.88),rgba(4,7,17,.94))!important;
+  border-color:rgba(174,158,211,.17)!important;
+  box-shadow:0 24px 80px -35px rgba(0,0,0,.95),0 0 55px -24px rgba(95,68,145,.48),inset 0 1px 0 rgba(255,255,255,.055)!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.eyebrow{color:rgba(216,200,235,.62)!important;letter-spacing:.16em!important}
+h1,h2,h3{color:#f5f2fb!important}
+p,.micro-copy{color:rgba(219,216,231,.68)!important}
+h1 span,h2 em{background:linear-gradient(100deg,#eee8ff,#9d8ac9 62%,#d8c8aa)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.primary-btn{background:linear-gradient(135deg,#69538d,#4b3a6c)!important;border-color:rgba(226,216,246,.22)!important}
+.ghost-btn{background:rgba(255,255,255,.025)!important;border-color:rgba(190,178,216,.17)!important;color:#d9d1e7!important}
+
+/* ---------- PLAN A : THE GIFT PLANET ---------- */
+#giftmap .scene-aura{display:none!important}
+#giftmap .gift-request-card{position:relative;overflow:hidden}
+#giftmap .gift-request-card::after{
+  content:"";position:absolute;inset:-40%;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 72% 28%,rgba(89,60,144,.13),transparent 38%),radial-gradient(ellipse at 20% 78%,rgba(30,76,126,.09),transparent 42%);
+}
+#giftmap .gift-request-card>*{position:relative;z-index:1}
+#giftPlanA .map-scene{
+  background:
+    radial-gradient(circle at 68% 38%,rgba(128,93,183,.17),transparent 18%),
+    radial-gradient(circle at 30% 72%,rgba(39,91,143,.12),transparent 22%),
+    linear-gradient(180deg,#030711 0%,#050816 52%,#02040a 100%)!important;
+  border:1px solid rgba(163,148,203,.18)!important;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.65),0 18px 50px -30px rgba(55,38,94,.75)!important;
+}
+#giftPlanA .map-sky{background:
+  radial-gradient(160px 120px at 72% 30%,rgba(119,83,169,.22),transparent 72%),
+  radial-gradient(180px 150px at 27% 76%,rgba(31,85,133,.13),transparent 72%),
+  #030711!important;}
+#giftPlanA .map-grid{opacity:.13!important;background-image:linear-gradient(rgba(145,126,190,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(145,126,190,.12) 1px,transparent 1px)!important}
+#giftPlanA .map-watercolor{filter:blur(12px);opacity:.18!important}
+#giftPlanA .map-stars i{background:#f6f2ff!important;box-shadow:0 0 7px rgba(255,255,255,.5)!important}
+#giftPlanA .map-texture{opacity:.16!important}
+#giftPlanA .map-status-chip,#giftPlanA .map-eta-chip{
+  background:rgba(4,7,16,.72)!important;border-color:rgba(182,166,216,.18)!important;color:rgba(226,220,238,.72)!important;backdrop-filter:blur(8px)
+}
+#giftPlanA .map-compass{color:rgba(215,198,239,.55)!important}
+#giftPlanA .map-route-glow{stroke:rgba(154,128,207,.25)!important}
+#giftPlanA .map-route-remain{stroke:rgba(185,166,221,.68)!important}
+#giftPlanA .map-route-shimmer{stroke:rgba(235,225,255,.55)!important}
+#giftPlanA .map-pin-tag{background:rgba(5,7,16,.82)!important;border-color:rgba(180,165,212,.17)!important;color:#ddd5e9!important}
+#giftPlanA .map-pin-badge{background:rgba(17,15,32,.9)!important;border-color:rgba(187,167,221,.22)!important;box-shadow:0 0 20px rgba(102,73,150,.28)!important}
+#giftPlanA .map-gift-platform{background:radial-gradient(circle,rgba(148,113,197,.3),rgba(26,18,45,.85))!important;border-color:rgba(208,190,238,.3)!important;box-shadow:0 0 35px rgba(119,83,169,.35)!important}
+#giftPlanA .map-gift-icon{filter:grayscale(.15) saturate(.8);}
+#giftPlanA .ship-tracker{background:rgba(3,5,12,.65)!important;border-color:rgba(173,158,207,.13)!important}
+#giftPlanA .gift-form-head .gift-form-title{color:#ece7f4!important}
+#giftPlanA .gift-option{background:rgba(9,11,23,.72)!important;border-color:rgba(176,160,207,.14)!important;color:#e6dfef!important}
+#giftPlanA .gift-option:hover,#giftPlanA .gift-option.picked{background:rgba(83,62,119,.22)!important;border-color:rgba(188,167,225,.38)!important;box-shadow:0 0 22px -10px rgba(145,111,193,.65)!important}
+#giftPlanA .gift-field label{color:rgba(210,195,226,.7)!important}
+#giftPlanA .wish-note-input{background:rgba(1,3,9,.68)!important;border-color:rgba(173,157,207,.15)!important;color:#eeeaf4!important}
+
+/* Planetary halo behind the map without adding DOM. */
+#giftPlanA .map-scene::before{
+  content:"";position:absolute;right:-44px;top:18px;width:185px;height:185px;border-radius:50%;
+  background:radial-gradient(circle at 36% 32%,rgba(180,160,218,.38) 0 2%,rgba(102,76,148,.25) 20%,rgba(48,38,77,.52) 48%,rgba(7,9,19,0) 70%);
+  box-shadow:inset -25px -22px 40px rgba(0,0,0,.7),0 0 65px rgba(91,67,137,.16);
+  pointer-events:none;z-index:0;
+}
+#giftPlanA .map-scene::after{
+  content:"";position:absolute;right:-66px;top:66px;width:220px;height:62px;border:1px solid rgba(186,169,221,.13);border-radius:50%;transform:rotate(-18deg);pointer-events:none;z-index:0;}
+
+/* ---------- PLAN B : THE FLOATING DIARY ---------- */
+#giftPlanB .diary-scene{
+  background:
+    radial-gradient(circle at 50% 48%,rgba(133,102,178,.17),transparent 24%),
+    radial-gradient(circle at 18% 80%,rgba(35,79,122,.12),transparent 28%),
+    linear-gradient(180deg,#02050d,#050817)!important;
+  border-color:rgba(175,158,209,.18)!important;
+  box-shadow:inset 0 0 55px rgba(0,0,0,.65),0 18px 55px -32px rgba(75,51,112,.7)!important;
+}
+#giftPlanB .diary-glow{background:radial-gradient(circle at 50% 50%,rgba(151,119,198,.2),transparent 58%)!important}
+#giftPlanB .diary-icon{font-size:0;filter:none!important}
+#giftPlanB .diary-icon::before{
+  content:"✦";font-size:38px;color:#e8ddf7;text-shadow:0 0 25px rgba(180,150,225,.7);}
+#giftPlanB .diary-scene::before{
+  content:"";position:absolute;width:118px;height:74px;border-radius:7px 7px 10px 10px;
+  background:linear-gradient(135deg,#171323,#090b16);border:1px solid rgba(208,191,235,.3);
+  box-shadow:-10px 14px 30px rgba(0,0,0,.5),0 0 30px rgba(128,95,173,.18),inset 10px 0 rgba(255,255,255,.025);
+  transform:rotate(-5deg);z-index:0;
+}
+#giftPlanB .diary-scene::after{
+  content:"";position:absolute;width:1px;height:55px;background:rgba(220,207,239,.28);transform:rotate(-5deg) translateX(0);z-index:1;
+}
+#giftPlanB .wish-note-input{background:rgba(1,3,9,.7)!important;border-color:rgba(173,157,207,.15)!important;color:#eeeaf4!important}
+#giftPlanB .diary-field label{color:rgba(210,195,226,.7)!important}
+
+/* Other story scenes inherit the same universe, with restrained warm accent. */
+#flower-screen .scene-aura,#letter-screen .scene-aura,#wish-screen .scene-aura,#farewell-screen .scene-aura{opacity:.12!important;filter:saturate(.35)!important}
+#flower-screen .card,#letter-screen .card,#wish-screen .card,#farewell-screen .card{background:linear-gradient(145deg,rgba(8,11,24,.91),rgba(3,5,13,.96))!important}
+
+@media(max-width:600px){
+  #giftPlanA .map-scene::before{right:-72px;top:28px;width:150px;height:150px}
+  #giftPlanA .map-scene::after{right:-84px;top:72px;width:180px}
+  #giftPlanB .diary-scene::before{width:100px;height:64px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #giftPlanA .map-scene::before,#giftPlanA .map-scene::after{animation:none!important}
+}
+
+/* =========================================================
+   A LITTLE UNIVERSE — CINEMATIC THEME PASS
+   One visual language, two worlds: Gift Planet + Floating Diary.
+   Lightweight: CSS-only atmosphere, no particle DOM storm.
+   ========================================================= */
+:root{
+  --u-void:#02030a;
+  --u-ink:#050817;
+  --u-blue:#0b1730;
+  --u-violet:#211536;
+  --u-lilac:#8d79b9;
+  --u-star:#f7f3ff;
+  --u-warm:#d8c8a7;
+}
+html,body{background:var(--u-void)!important}
+body{overflow-x:hidden}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(ellipse 80% 55% at 78% 12%,rgba(69,49,111,.18),transparent 65%),
+    radial-gradient(ellipse 70% 55% at 12% 86%,rgba(25,61,102,.14),transparent 68%),
+    linear-gradient(180deg,#02030a 0%,#040713 52%,#010207 100%);
+}
+body::after{z-index:9998!important;opacity:.9}
+#deepSpace{background:
+  radial-gradient(1px 1px at 11% 17%,rgba(255,255,255,.85),transparent 70%),
+  radial-gradient(1px 1px at 31% 39%,rgba(231,224,255,.65),transparent 70%),
+  radial-gradient(1.5px 1.5px at 69% 17%,rgba(255,255,255,.75),transparent 70%),
+  radial-gradient(1px 1px at 86% 57%,rgba(214,225,255,.55),transparent 70%),
+  radial-gradient(1px 1px at 57% 88%,rgba(255,255,255,.5),transparent 70%),
+  radial-gradient(430px 300px at 76% 18%,rgba(72,47,118,.14),transparent 72%),
+  radial-gradient(520px 360px at 18% 78%,rgba(20,60,105,.10),transparent 74%)!important;
+  opacity:.95!important;}
+#deepSpace .solar-system{opacity:.18;filter:saturate(.55)}
+#stars{opacity:.7!important}
+
+/* Every story screen becomes a quiet cinematic stage. */
+.screen{background:transparent!important;isolation:isolate}
+.screen::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.8;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(91,67,137,.075),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(49,84,131,.06),transparent 25%);
+  animation:universeBreath 12s ease-in-out infinite alternate;
+}
+.screen::after{
+  content:"";position:absolute;inset:8% 5%;pointer-events:none;z-index:-1;border-radius:40px;
+  border:1px solid rgba(221,213,244,.025);
+  box-shadow:inset 0 0 90px rgba(0,0,0,.3);
+}
+@keyframes universeBreath{from{transform:scale(1);opacity:.55}to{transform:scale(1.035);opacity:.9}}
+
+.card{
+  background:linear-gradient(145deg,rgba(8,11,24,.78),rgba(2,4,11,.94))!important;
+  border:1px solid rgba(210,199,233,.13)!important;
+  box-shadow:0 35px 100px -45px rgba(0,0,0,.98),0 0 70px -42px rgba(116,88,163,.55),inset 0 1px rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(18px) saturate(.9)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(.9)!important;
+}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.035),transparent 28%,transparent 72%,rgba(149,120,196,.035));}
+
+/* ---------- OPENING: quiet, mysterious, expensive ---------- */
+#pin .galaxy-bg{opacity:.5!important;filter:saturate(.65) brightness(.72)!important}
+#pin .galaxy-core{box-shadow:0 0 90px rgba(129,96,183,.2)!important}
+#pin .pin-inner{position:relative}
+#pin .pin-inner::after{content:"✦";position:absolute;top:24px;right:27px;font-size:10px;color:rgba(247,243,255,.65);text-shadow:0 0 16px rgba(220,205,255,.8);animation:quietStar 3.8s ease-in-out infinite}
+@keyframes quietStar{0%,100%{opacity:.2;transform:scale(.75)}50%{opacity:1;transform:scale(1.15)}}
+
+/* ---------- PLAN A / GIFT PLANET ---------- */
+#giftPlanA{position:relative}
+#giftPlanA::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 78% 18%,rgba(104,75,157,.16),transparent 20%),radial-gradient(circle at 16% 82%,rgba(32,79,125,.11),transparent 24%);z-index:0}
+#giftPlanA .map-scene{position:relative;overflow:hidden;background:
+  radial-gradient(ellipse 230px 170px at 76% 23%,rgba(93,67,142,.22),transparent 72%),
+  radial-gradient(ellipse 250px 180px at 18% 78%,rgba(23,70,113,.12),transparent 72%),
+  linear-gradient(145deg,#02050d,#050918 58%,#010308)!important;
+  border-color:rgba(195,181,222,.16)!important;}
+#giftPlanA .map-scene::before{right:-42px!important;top:12px!important;width:205px!important;height:205px!important;background:
+  radial-gradient(circle at 34% 29%,rgba(220,211,239,.46) 0 1.8%,rgba(128,101,169,.34) 18%,rgba(46,37,72,.7) 52%,transparent 70%)!important;
+  box-shadow:inset -28px -25px 45px rgba(0,0,0,.72),0 0 90px rgba(106,77,154,.2)!important;}
+#giftPlanA .map-scene::after{right:-70px!important;top:70px!important;width:245px!important;height:68px!important;border-color:rgba(218,207,239,.16)!important;box-shadow:0 0 25px rgba(123,93,163,.1)}
+#giftPlanA .map-sky{background:
+  radial-gradient(circle at 75% 25%,rgba(111,82,159,.15),transparent 19%),
+  radial-gradient(circle at 25% 76%,rgba(31,76,121,.1),transparent 23%),#030611!important}
+#giftPlanA .map-grid{opacity:.08!important;transform:perspective(500px) rotateX(58deg) scale(1.3);transform-origin:center bottom}
+#giftPlanA .map-watercolor{opacity:.11!important;filter:blur(16px) saturate(.45)!important}
+#giftPlanA .map-stars i{animation:mapStar 4.5s ease-in-out infinite alternate!important}
+#giftPlanA .map-stars i:nth-child(3n){animation-delay:-1.7s!important}
+@keyframes mapStar{from{opacity:.16;transform:scale(.7)}to{opacity:.9;transform:scale(1.18)}}
+#giftPlanA .map-route-glow{stroke:rgba(137,111,190,.2)!important;filter:drop-shadow(0 0 6px rgba(137,111,190,.18))}
+#giftPlanA .map-route-remain{stroke:rgba(219,208,237,.66)!important}
+#giftPlanA .map-route-shimmer{stroke:rgba(248,244,255,.75)!important;filter:drop-shadow(0 0 5px rgba(248,244,255,.45))}
+#giftPlanA .map-gift-platform{background:radial-gradient(circle,rgba(170,139,212,.35),rgba(28,20,49,.9) 65%,transparent 72%)!important;box-shadow:0 0 45px rgba(136,99,183,.38)!important}
+#giftPlanA .map-pin-badge{box-shadow:0 0 28px rgba(130,97,174,.38)!important}
+#giftPlanA .ship-tracker{background:rgba(2,5,13,.66)!important;backdrop-filter:blur(12px)}
+
+/* ---------- PLAN B / FLOATING DIARY ---------- */
+#giftPlanB{position:relative}
+#giftPlanB::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 210px 150px at 50% 48%,rgba(128,96,177,.16),transparent 72%),
+  radial-gradient(ellipse 240px 180px at 14% 82%,rgba(26,72,116,.09),transparent 74%);z-index:0}
+#giftPlanB .diary-scene{position:relative;overflow:hidden;background:
+  radial-gradient(circle at 50% 50%,rgba(122,91,169,.13),transparent 22%),
+  linear-gradient(180deg,#02040b,#050817 65%,#010208)!important;
+  border-color:rgba(203,190,226,.15)!important;}
+#giftPlanB .diary-scene::before{width:145px!important;height:92px!important;transform:rotate(-6deg)!important;background:linear-gradient(135deg,#171526,#080b16)!important;border-color:rgba(223,210,239,.25)!important;box-shadow:0 20px 55px rgba(0,0,0,.65),0 0 42px rgba(125,92,173,.24)!important}
+#giftPlanB .diary-glow{background:radial-gradient(circle,rgba(159,126,205,.22),rgba(65,47,92,.06) 36%,transparent 68%)!important;animation:diaryAura 6s ease-in-out infinite alternate}
+@keyframes diaryAura{from{transform:scale(.92);opacity:.55}to{transform:scale(1.08);opacity:1}}
+#giftPlanB .diary-icon::before{font-size:42px!important;color:#f0eafa!important;text-shadow:0 0 28px rgba(188,160,228,.85)!important}
+#giftPlanB .diary-stars i{animation:diaryStar 5s ease-in-out infinite alternate!important}
+@keyframes diaryStar{from{opacity:.12;transform:translateY(3px) scale(.75)}to{opacity:.9;transform:translateY(-3px) scale(1.12)}}
+
+/* ---------- STORY SCREENS: each gets a subtle celestial identity ---------- */
+#playlist.screen::before{background:radial-gradient(circle at 80% 30%,rgba(89,118,165,.12),transparent 30%),radial-gradient(circle at 15% 80%,rgba(109,72,142,.08),transparent 32%)}
+#intro.screen::before{background:radial-gradient(circle at 50% 18%,rgba(155,123,193,.12),transparent 26%)}
+#letter.screen::before{background:radial-gradient(circle at 72% 28%,rgba(176,139,111,.08),transparent 22%),radial-gradient(circle at 20% 80%,rgba(81,74,125,.1),transparent 30%)}
+#wish.screen::before{background:radial-gradient(circle at 50% 32%,rgba(121,98,180,.13),transparent 27%)}
+#memories.screen::before{background:radial-gradient(circle at 25% 25%,rgba(82,110,154,.1),transparent 25%),radial-gradient(circle at 80% 75%,rgba(137,91,145,.1),transparent 28%)}
+#candle.screen::before{background:radial-gradient(circle at 50% 58%,rgba(206,159,87,.1),transparent 20%)}
+#farewell.screen::before{background:radial-gradient(circle at 50% 50%,rgba(99,74,149,.16),transparent 32%)}
+#final.screen::before{background:radial-gradient(circle at 50% 50%,rgba(177,144,204,.18),transparent 26%)}
+
+/* The final screen: stars become a little more alive. */
+#final .card,#endscreen .card{box-shadow:0 40px 120px -48px rgba(0,0,0,1),0 0 90px -35px rgba(133,99,174,.62),inset 0 1px rgba(255,255,255,.07)!important}
+
+@media(max-width:600px){
+  .screen::after{inset:3% 2%;border-radius:28px}
+  #giftPlanA .map-scene::before{right:-76px!important;width:165px!important;height:165px!important}
+  #giftPlanA .map-scene::after{right:-88px!important;width:195px!important;height:55px!important}
+  #giftPlanB .diary-scene::before{width:118px!important;height:75px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .screen::before,#pin .pin-inner::after,#giftPlanB .diary-glow,#giftPlanA .map-stars i,#giftPlanB .diary-stars i{animation:none!important}
+}
