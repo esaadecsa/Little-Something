@@ -1,0 +1,127 @@
+/* =============================================================
+   A LITTLE SOMETHING — "WOW" ENHANCEMENT LAYER (v3 — STATIS)
+   ---------------------------------------------------------
+   Dimuat SETELAH style.css. Tidak mengubah satupun ID/class yang
+   dipakai script.js / living-story-engine.js.
+
+   FILOSOFI v3 — setelah beberapa kali percobaan animasi (kartu
+   "bernapas", tombol "berdenyut", kilau teks, partikel bintang
+   tambahan) tetap menyebabkan glitch di sebagian HP meski sudah
+   dibatasi ke layar aktif saja, pendekatan diubah TOTAL:
+
+   >>> NOL animasi CSS/JS tambahan. <<<
+
+   Semua "wow" di sini murni dari WARNA, CAHAYA (shadow/glow
+   statis), KONTRAS, dan KOMPOSISI — tidak ada satupun yang bisa
+   "gagal jalan" karena memang tidak ada yang berjalan. Ini jauh
+   lebih aman untuk perangkat low-end/Brave dengan Shields aktif,
+   dan tetap terasa lebih mewah dibanding versi asli.
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   1) KARTU — kedalaman lebih kaya lewat lapisan shadow statis
+   ------------------------------------------------------------- */
+.card{
+  box-shadow:
+    var(--shadow-lift),
+    0 0 40px -8px rgba(var(--violet-rgb),.38),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+/* garis foil tepi kartu: dua warna lembut, TANPA animasi */
+.card::before{
+  background:linear-gradient(135deg,
+    rgba(235,218,255,.75) 0%,
+    rgba(154,95,232,.4) 35%,
+    rgba(240,71,159,.4) 70%,
+    rgba(255,217,240,.65) 100%);
+}
+
+/* -------------------------------------------------------------
+   2) TIPOGRAFI — judul dengan gradient warna STATIS (tanpa animasi
+   background-position sama sekali, supaya nol risiko flicker)
+   ------------------------------------------------------------- */
+h1 span,h2 em{
+  background:linear-gradient(100deg,
+    var(--lavender-soft) 0%,
+    var(--violet) 55%,
+    var(--magenta) 100%);
+  -webkit-background-clip:text;background-clip:text;
+}
+
+/* -------------------------------------------------------------
+   3) TOMBOL — glow lebih kaya, statis (hover tetap boleh berubah,
+   itu respons ke interaksi user, bukan loop otomatis)
+   ------------------------------------------------------------- */
+.primary-btn{
+  box-shadow:var(--glow-magenta), 0 1px 0 rgba(255,255,255,.22) inset;
+}
+.primary-btn:hover{
+  box-shadow:0 10px 34px -6px rgba(240,71,159,.6), 0 1px 0 rgba(255,255,255,.25) inset;
+  filter:brightness(1.06);
+}
+
+/* -------------------------------------------------------------
+   4) LATAR AMBIENT — vignette statis + gradasi ungu/magenta lebih
+   dalam di sudut, TANPA elemen bergerak baru
+   ------------------------------------------------------------- */
+body::before{
+  background:
+    radial-gradient(1100px 720px at 85% -8%, rgba(var(--magenta-rgb),.16), transparent 62%),
+    radial-gradient(900px 620px at -8% 6%, rgba(var(--violet-rgb),.18), transparent 60%),
+    var(--bg);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 120% 100% at 50% 45%,
+    transparent 45%,
+    rgba(3,1,8,.32) 78%,
+    rgba(3,1,8,.6) 100%);
+}
+
+/* -------------------------------------------------------------
+   5) WISH / MEMORY / KEEPSAKE CARDS — hover statis (bukan loop),
+   aman karena cuma bereaksi ke sentuhan/kursor
+   ------------------------------------------------------------- */
+.wish-pill.wish-card:hover,.keepsake-note:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 26px -12px rgba(var(--violet-rgb),.35);
+}
+
+/* -------------------------------------------------------------
+   6) PIN GATE — glow statis, tanpa efek pembuka animasi
+   ------------------------------------------------------------- */
+#pinCard{
+  box-shadow:var(--shadow-lift), 0 0 46px -14px rgba(var(--violet-rgb),.42);
+}
+.pin-input:focus{
+  box-shadow:0 0 0 3px rgba(var(--violet-rgb),.24);
+}
+
+/* -------------------------------------------------------------
+   7) FINAL / ENDSCREEN — glow statis
+   ------------------------------------------------------------- */
+.final-mark,.end-mark{
+  text-shadow:0 0 30px rgba(var(--magenta-rgb),.4);
+}
+
+/* -------------------------------------------------------------
+   8) PLAN A (map-scene) & PLAN B (diary-scene) — dominan gelap,
+   ungu cuma gradasi tipis, statis
+   ------------------------------------------------------------- */
+.map-sky{
+  background:
+    radial-gradient(60% 50% at 20% 100%, rgba(143,98,216,.14), transparent 72%),
+    radial-gradient(55% 50% at 100% 0%, rgba(232,120,177,.1), transparent 72%),
+    linear-gradient(200deg, #05030f 0%, var(--bg-2) 60%, var(--bg) 100%);
+}
+.map-watercolor{opacity:.28}
+.map-watercolor-a{background:radial-gradient(circle,rgba(184,154,242,.32),rgba(184,154,242,0) 70%)}
+.map-watercolor-b{background:radial-gradient(circle,rgba(232,120,177,.28),rgba(232,120,177,0) 70%)}
+.diary-scene{
+  background:
+    radial-gradient(120% 140% at 50% 100%,rgba(217,200,255,.07),transparent 72%),
+    linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.05));
+}
+.diary-glow{
+  background:radial-gradient(60% 80% at 50% 50%,rgba(216,163,255,.12),transparent 72%);
+}
