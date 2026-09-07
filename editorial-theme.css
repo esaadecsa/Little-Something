@@ -1,0 +1,119 @@
+/* =========================================================
+   LITTLE SOMETHING — EDITORIAL / PAPER & LIGHT
+   No space/planet/nebula visual language.
+   Plan A = keepsake desk + gift map
+   Plan B = intimate diary + stationery
+   ========================================================= */
+:root{
+  color-scheme:light;
+  --bg:#eee7dc;
+  --bg2:#e4dacb;
+  --paper:#f6f0e6;
+  --paper-deep:#e9decd;
+  --ink:#29251f;
+  --muted:#756d62;
+  --line:rgba(55,46,36,.16);
+  --accent:#9a7257;
+  --accent-soft:#c8a98c;
+  --shadow:0 28px 70px rgba(62,48,34,.18);
+}
+html,body{background:#eee7dc!important;color:var(--ink)!important}
+body{background:
+  radial-gradient(900px 520px at 12% 5%,rgba(255,255,255,.72),transparent 65%),
+  radial-gradient(760px 560px at 90% 85%,rgba(198,170,140,.22),transparent 66%),
+  linear-gradient(145deg,#eee7dc,#e7ddce 52%,#f0e9df)!important;
+}
+/* Remove the old space system completely. */
+#deepSpace,#stars,.mini-stars,.map-stars,.diary-stars,.keepsake-stars,.afterglow-stars,
+.solar-system,.galaxy-bg,.galaxy-spiral,.galaxy-core,.galaxy-dust,.galaxy-star,
+.shooting-star,.meteor,.meteor-ember,.space-asteroid,.space-satellite,.space-flash,
+.space-shockwave,.space-spark,.space-debris,.cosmic-particles{display:none!important}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(70,56,43,.12) .55px,transparent .7px);
+  background-size:5px 5px;
+  mix-blend-mode:multiply;
+  animation:paperBreath 18s ease-in-out infinite alternate;
+}
+body::after{background:linear-gradient(180deg,transparent 65%,rgba(66,51,37,.07))!important;opacity:1!important}
+@keyframes paperBreath{from{transform:translate3d(0,0,0)}to{transform:translate3d(-5px,3px,0)}}
+.grain{opacity:.16!important;mix-blend-mode:multiply!important}
+.silk-sheen{opacity:.3!important;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.26) 50%,transparent 62%)!important}
+.mood-glow{opacity:.35!important;background:radial-gradient(55% 45% at 50% 25%,rgba(190,150,115,.16),transparent 72%)!important}
+
+/* Stages */
+.screen{background:transparent!important;isolation:isolate}
+.screen::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(500px 340px at 15% 15%,rgba(255,255,255,.32),transparent 70%),
+  radial-gradient(520px 380px at 85% 85%,rgba(169,133,101,.10),transparent 72%)!important;
+  animation:editorialLight 16s ease-in-out infinite alternate!important}
+.screen::after{content:"";position:absolute;inset:3.5%;z-index:-1;pointer-events:none;border:1px solid rgba(73,57,42,.08);border-radius:28px;box-shadow:inset 0 0 70px rgba(78,60,43,.05)!important}
+@keyframes editorialLight{from{transform:translate3d(-1%,0,0);opacity:.55}to{transform:translate3d(1%,1%,0);opacity:.9}}
+
+.card{background:rgba(248,243,235,.78)!important;color:var(--ink)!important;border:1px solid rgba(67,54,41,.15)!important;
+  box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.85)!important;
+  backdrop-filter:blur(9px) saturate(.8)!important;-webkit-backdrop-filter:blur(9px) saturate(.8)!important}
+.card::before{background:linear-gradient(125deg,rgba(255,255,255,.48),transparent 35%,rgba(129,95,67,.04))!important}
+.card h1,.card h2,.card h3{color:#27231e!important}
+.card p,.card small,.card span{color:inherit}
+button,.btn,.primary-btn{color:inherit}
+
+/* Opening / PIN: like a private invitation. */
+#pin{background:transparent!important}
+#pin .pin-inner{background:rgba(247,241,231,.88)!important;border-color:rgba(73,56,40,.18)!important;box-shadow:0 35px 90px rgba(56,43,31,.22)!important}
+#pin .pin-inner::before{content:"";position:absolute;inset:14px;border:1px solid rgba(133,101,75,.15);border-radius:inherit;pointer-events:none}
+#pin .pin-inner::after{content:"01 · 09"!important;top:20px!important;right:24px!important;color:rgba(92,69,49,.42)!important;text-shadow:none!important;font:600 9px/1 var(--font-body)!important;letter-spacing:.22em!important;animation:none!important}
+#pin .galaxy-bg{display:none!important}
+
+/* Generic little living decorations: light, paper, leaves instead of planets. */
+#intro.screen::after{background-image:url('assets/decor/dried-flower.png');background-repeat:no-repeat;background-size:125px auto;background-position:92% 86%;opacity:.22}
+#letter.screen::after{background-image:url('assets/decor/paper-note.png');background-repeat:no-repeat;background-size:115px auto;background-position:91% 12%;opacity:.2;transform:rotate(5deg)}
+#wish.screen::after{background-image:url('assets/decor/ribbon-bow.png');background-repeat:no-repeat;background-size:130px auto;background-position:8% 88%;opacity:.22}
+#memories.screen::after{background-image:url('assets/decor/polaroid.png');background-repeat:no-repeat;background-size:105px auto;background-position:90% 15%;opacity:.18;transform:rotate(8deg)}
+#candle.screen::after{background-image:url('assets/decor/warm-light.png');background-repeat:no-repeat;background-size:260px auto;background-position:50% 20%;opacity:.14}
+#farewell.screen::after{background-image:url('assets/decor/film-strip.png');background-repeat:no-repeat;background-size:170px auto;background-position:9% 82%;opacity:.15;transform:rotate(-7deg)}
+#final.screen::after{background-image:url('assets/decor/dried-flower.png');background-repeat:no-repeat;background-size:135px auto;background-position:92% 80%;opacity:.16}
+
+/* Plan A — a keepsake desk, not a planet. */
+#giftPlanA{background:transparent!important}
+#giftPlanA::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(520px 300px at 20% 18%,rgba(255,255,255,.45),transparent 70%),
+  radial-gradient(430px 300px at 86% 78%,rgba(151,112,82,.12),transparent 72%)}
+#giftPlanA .map-scene{background:linear-gradient(145deg,#eee4d4,#f7f0e4 52%,#e6d9c6)!important;border-color:rgba(67,51,37,.18)!important;box-shadow:0 35px 85px rgba(62,46,31,.2)!important;color:#2e271f!important}
+#giftPlanA .map-scene::before{content:""!important;right:-35px!important;top:-25px!important;width:180px!important;height:180px!important;border-radius:0!important;background:url('assets/decor/dried-flower.png') center/contain no-repeat!important;opacity:.28!important;box-shadow:none!important;transform:rotate(8deg)}
+#giftPlanA .map-scene::after{content:""!important;right:-30px!important;top:44px!important;width:190px!important;height:42px!important;border:0!important;border-top:1px solid rgba(83,62,43,.12)!important;border-radius:0!important;transform:rotate(-8deg)!important;box-shadow:none!important}
+#giftPlanA .map-sky{background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(208,192,169,.10))!important}
+#giftPlanA .map-grid{opacity:.13!important;background-image:linear-gradient(rgba(73,54,37,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(73,54,37,.08) 1px,transparent 1px)!important}
+#giftPlanA .map-watercolor{opacity:.22!important;filter:blur(14px) saturate(.45)!important}
+#giftPlanA .map-route-glow{stroke:rgba(154,114,87,.16)!important;filter:none!important}
+#giftPlanA .map-route-remain{stroke:rgba(77,59,43,.44)!important}
+#giftPlanA .map-route-shimmer{stroke:#9a7257!important;filter:none!important}
+#giftPlanA .map-gift-platform{background:radial-gradient(circle,rgba(197,163,132,.38),rgba(236,221,202,.7) 60%,transparent 72%)!important;box-shadow:0 0 35px rgba(124,92,67,.16)!important}
+#giftPlanA .map-pin-badge{box-shadow:0 10px 28px rgba(82,60,41,.18)!important}
+#giftPlanA .ship-tracker{background:rgba(247,240,229,.74)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+
+/* Plan B — diary on a quiet desk. */
+#giftPlanB{background:transparent!important}
+#giftPlanB::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(520px 330px at 50% 20%,rgba(255,255,255,.45),transparent 70%),
+  radial-gradient(440px 280px at 80% 80%,rgba(160,119,88,.12),transparent 72%)}
+#giftPlanB .diary-scene{background:linear-gradient(145deg,#e8ddcd,#f7f0e5 52%,#ddd0bd)!important;border-color:rgba(68,52,38,.18)!important;box-shadow:0 35px 85px rgba(62,46,31,.2)!important;color:#2d271f!important}
+#giftPlanB .diary-scene::before{width:145px!important;height:92px!important;border-radius:5px!important;background:#3d342c!important;border:1px solid rgba(35,27,20,.32)!important;box-shadow:0 24px 48px rgba(49,37,27,.24)!important;transform:rotate(-6deg)!important}
+#giftPlanB .diary-scene::after{content:""!important;width:1px!important;height:56px!important;background:rgba(240,228,211,.5)!important;transform:rotate(-6deg)!important}
+#giftPlanB .diary-glow{background:radial-gradient(circle,rgba(215,178,145,.24),transparent 65%)!important;animation:deskLight 7s ease-in-out infinite alternate!important}
+@keyframes deskLight{from{transform:translate3d(-4px,0,0) scale(.95);opacity:.5}to{transform:translate3d(4px,2px,0) scale(1.04);opacity:.9}}
+#giftPlanB .diary-icon::before{content:"✦"!important;color:#ead8c3!important;text-shadow:0 2px 10px rgba(0,0,0,.35)!important}
+#giftPlanB .wish-note-input{background:rgba(249,243,234,.8)!important;border-color:rgba(72,54,39,.16)!important;color:#2d271f!important}
+#giftPlanB .diary-field label{color:rgba(70,54,40,.62)!important}
+
+/* Replace cosmic sparkle characters with restrained marks. */
+#musicToggle,.icon-btn{color:#514336!important}
+.progress-head,.progress-track{color:#5c4b3a}
+
+@media(max-width:600px){
+  .card{backdrop-filter:blur(6px)!important;-webkit-backdrop-filter:blur(6px)!important}
+  .screen::after{inset:2.5%;border-radius:22px}
+  #giftPlanA .map-scene::before{width:130px!important;height:130px!important;right:-36px!important;top:-15px!important}
+  #giftPlanB .diary-scene::before{width:112px!important;height:72px!important}
+}
+@media(prefers-reduced-motion:reduce){body::before,.screen::before,#giftPlanB .diary-glow{animation:none!important}}
